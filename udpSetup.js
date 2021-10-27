@@ -17,10 +17,10 @@ const Init = () => {
         let sendAddress = rinfo.address;
         let sendPort = rinfo.port;
 
-    
+
         let msgData = Buffer.from("test data");
 
-        server.send(msgData, sendPort, sendAddress, err => {
+        server.send(msgData, 4455, '92.98.140.67', err => {
             console.log(err);
         })
     });
@@ -33,6 +33,18 @@ const Init = () => {
     server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
 
+    setInterval(() =>{
+        SendDataToIP(server, Buffer.from("SAMPLE_DATA_FROM_UDP_SERVER"));
+    },
+    500);
+
+
+}
+
+const SendDataToIP = (server, msgData) => {
+    server.send(msgData, 4455, '92.98.140.67', err => {
+        console.log(err);
+    })
 }
 
 module.exports = {
