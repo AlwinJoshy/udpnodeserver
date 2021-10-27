@@ -38,14 +38,14 @@ server.on('message', (msg, rinfo) => {
     setInterval(() => {
         SendDataToIP(server, Buffer.from("SAMPLE_DATA_FROM_UDP_SERVER"));
     },
-        500);
+        1000);
 
 
 }
 
 const SendDataToIP = (server, msgData) => {
     console.log("Sending...");
-    server.send(msgData, 4455, '92.98.140.67', err => {
+    server.send(msgData, 4545, '92.98.140.67', err => {
         //console.log(err);
     })
 }
