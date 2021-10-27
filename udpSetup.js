@@ -35,9 +35,10 @@ server.on('message', (msg, rinfo) => {
     //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
 
+    let serverAddress = server.address();
     setInterval(() => {
-        const address = server.address();
-        SendDataToIP(server, Buffer.from(address.address + " " + address.port));
+        
+        SendDataToIP(server, Buffer.from("serverAddress.address" + " " + "serverAddress.port"));
     },
         1000);
 
