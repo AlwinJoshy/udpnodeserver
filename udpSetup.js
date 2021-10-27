@@ -12,38 +12,41 @@ const Init = () => {
         server.close();
     });
 
-    server.on('message', (msg, rinfo) => {
-        console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
-        let sendAddress = rinfo.address;
-        let sendPort = rinfo.port;
+    /*
+server.on('message', (msg, rinfo) => {
+    console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+    let sendAddress = rinfo.address;
+    let sendPort = rinfo.port;
 
 
-        let msgData = Buffer.from("test data");
+    let msgData = Buffer.from("test data");
 
-        server.send(msgData, 4455, '92.98.140.67', err => {
-            console.log(err);
-        })
-    });
+    server.send(msgData, 4455, '92.98.140.67', err => {
+        console.log(err);
+    })
+});
 
+*/
     server.on('listening', () => {
         const address = server.address();
         console.log(`server listening ${address.address}:${address.port}`);
     });
 
-    server.bind(PORT_NUM);
+    //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
 
-    setInterval(() =>{
+    setInterval(() => {
         SendDataToIP(server, Buffer.from("SAMPLE_DATA_FROM_UDP_SERVER"));
     },
-    500);
+        500);
 
 
 }
 
 const SendDataToIP = (server, msgData) => {
+    console.log("Sending...");
     server.send(msgData, 4455, '92.98.140.67', err => {
-        console.log(err);
+        //console.log(err);
     })
 }
 
