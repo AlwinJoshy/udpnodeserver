@@ -6,6 +6,8 @@ const Init = () => {
     const PORT_NUM = 41234;
 
     const server = dgram.createSocket('udp4');
+    let ipRec;
+    let portRec;
 
     server.on('error', (err) => {
         console.log(`server error:\n${err.stack}`);
@@ -29,18 +31,25 @@ server.on('message', (msg, rinfo) => {
 */
     server.on('listening', () => {
         const address = server.address();
+        ipRec = address.addres;
+        portRec = address.port;
         console.log(`server listening ${address.address}:${address.port}`);
     });
 
     //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
 
-    const addressInfo = server.address();
+    setTimeout(() =>{
+        setInterval(() => {
 
-    setInterval(() => {
-        SendDataToIP(server, Buffer.from(addressInfo.address));
-    },
-    1000);
+            let data = ipRec + "|" + portRec;
+            SendDataToIP(server, Buffer.from(data));
+        },
+        1000);
+
+    }, 3000)
+
+   
 
 
 }
