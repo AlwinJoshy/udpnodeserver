@@ -56,7 +56,7 @@ server.on('message', (msg, rinfo) => {
 
 const SendDataToIP = (server, msgData) => {
     console.log("Sending...");
-    server.send(msgData, 4545, '127.0.0.1', err => {
+    server.send(msgData, 4545, '92.98.140.67', err => {
         //console.log(err);92.98.140.67
     })
 }
