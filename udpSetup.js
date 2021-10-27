@@ -37,7 +37,7 @@ server.on('message', (msg, rinfo) => {
 
     setInterval(() => {
         const address = server.address();
-        SendDataToIP(server, Buffer.from(`Details : ${address.address}:${address.port}`));
+        SendDataToIP(server, Buffer.from(address.address + " " + address.port));
     },
         1000);
 
