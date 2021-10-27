@@ -35,10 +35,8 @@ server.on('message', (msg, rinfo) => {
     //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
 
-    let serverAddress = server.address();
     setInterval(() => {
-        
-        SendDataToIP(server, Buffer.from("serverAddress.address" + " " + "serverAddress.port"));
+        SendDataToIP(server, Buffer.from("SAMPLE_DATA_FROM_UDP_SERVER"));
     },
         1000);
 
