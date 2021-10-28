@@ -1,9 +1,15 @@
 const dgram = require('dgram');
+const http = require('http');
 
 
 const Init = () => {
 
     const PORT_NUM = process.env.PORT || 41234;
+
+    http.createServer(function (req, res) {
+        res.write('Hello World!'); //write a response to the client
+        res.end(); //end the response
+    }).listen(PORT_NUM);
 
     const server = dgram.createSocket('udp4');
     let ipRec;
@@ -15,22 +21,22 @@ const Init = () => {
     });
 
 
-server.on('message', (msg, rinfo) => {
-    console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+    server.on('message', (msg, rinfo) => {
+        console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+
+        /*
+        let sendAddress = rinfo.address;
+        let sendPort = rinfo.port;
     
-    /*
-    let sendAddress = rinfo.address;
-    let sendPort = rinfo.port;
-
+        
+        let msgData = Buffer.from("test data");
     
-    let msgData = Buffer.from("test data");
-
-
-    server.send(msgData, 4455, '92.98.140.67', err => {
-        console.log(err);
-    })
-    */
-});
+    
+        server.send(msgData, 4455, '92.98.140.67', err => {
+            console.log(err);
+        })
+        */
+    });
 
     server.on('listening', () => {
         const address = server.address();
@@ -39,20 +45,20 @@ server.on('message', (msg, rinfo) => {
         console.log(`server listening ${address.address}:${address.port}`);
     });
 
-    server.bind(PORT_NUM);
+    //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
 
-    setTimeout(() =>{
+    setTimeout(() => {
         setInterval(() => {
 
             let data = ipRec + "|" + portRec;
             SendDataToIP(server, Buffer.from(data));
         },
-        1000);
+            1000);
 
     }, 3000)
 
-   
+
 
 
 }
