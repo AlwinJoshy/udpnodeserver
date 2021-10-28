@@ -16,18 +16,18 @@ const Init = (dashboard) => {
 
         let sendAddress = rinfo.address;
         let sendPort = rinfo.port;
-    
+
         let sendData = sendAddress + "|" + sendPort;
         let msgData = Buffer.from(sendData);
-    
+
         server.send(msgData, sendPort, sendAddress, err => {
-            if(err)console.log(err);
+            if (err) console.log(err);
         })
-    
+
     });
 
 
-    
+
 
     server.on('listening', () => {
         const address = server.address();
@@ -39,15 +39,16 @@ const Init = (dashboard) => {
 
     server.bind(0);
 
-    setTimeout(
+    setTimeout(() => {
         setInterval(() => {
             SendDataToIP(server, Buffer.from("wdawdwa"))
         }, 1000)
+    }
     , 3000)
 
- }
+}
 
- 
+
 const SendDataToIP = (server, msgData) => {
     server.send(msgData, 4545, '92.98.140.67', err => {
         //console.log(err);92.98.140.67
