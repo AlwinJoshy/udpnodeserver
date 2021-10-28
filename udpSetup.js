@@ -1,6 +1,6 @@
 const dgram = require('dgram');
 
-const Init = () => {
+const Init = (dashboard) => {
 
     const server = dgram.createSocket('udp4');
     let ipRec;
@@ -32,6 +32,7 @@ const Init = () => {
         const address = server.address();
         ipRec = address.address;
         portRec = address.port;
+        dashboard.udpPort = address.port;
         console.log(`server listening ${address.address}:${address.port}`);
     });
 

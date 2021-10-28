@@ -1,5 +1,10 @@
 const udp = require('./udpSetup.js');
 const httpApi = require('./httpApi.js');
 
-httpApi.Start();
-udp.Init();
+let dashboard = {
+    udpPort:0000,
+    serverIP:"NA"
+}
+
+httpApi.Start(dashboard);
+udp.Init(dashboard);
