@@ -37,7 +37,7 @@ const Init = () => {
 
     //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
-/*
+
     setTimeout(() => {
         setInterval(() => {
 
@@ -48,7 +48,7 @@ const Init = () => {
 
     }, 3000)
 
-*/
+
 
 
 }
