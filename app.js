@@ -9,4 +9,4 @@ let dashboard = {
 
 httpApi.Start(dashboard);
 udp.Init(dashboard);
-//socketServer.Init();
+socketServer.Init();
