@@ -2,7 +2,10 @@ const dgram = require('dgram');
 
 const Init = (dashboard) => {
 
-    const server = dgram.createSocket('udp4');
+    const server = dgram.createSocket({
+        type: "udp4",
+        reuseAddr: true // <- NOTE: we are asking OS to let us reuse port
+    });
     let ipRec;
     let portRec;
 
@@ -37,14 +40,14 @@ const Init = (dashboard) => {
         console.log(`server listening ${address.address}:${address.port}`);
     });
 
-    server.bind(0);
+    server.bind(process.env.PORT || 41234);
 
     setTimeout(() => {
         setInterval(() => {
             SendDataToIP(server, Buffer.from("wdawdwa"))
         }, 1000)
     }
-    , 3000)
+        , 3000)
 
 }
 
