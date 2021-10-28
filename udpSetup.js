@@ -26,6 +26,9 @@ const Init = (dashboard) => {
     
     });
 
+
+    
+
     server.on('listening', () => {
         const address = server.address();
         ipRec = address.address;
@@ -35,7 +38,21 @@ const Init = (dashboard) => {
     });
 
     server.bind(0);
+
+    setTimeout(
+        setInterval(() => {
+            SendDataToIP(server, Buffer.from("wdawdwa"))
+        }, 1000)
+    , 3000)
+
  }
+
+ 
+const SendDataToIP = (server, msgData) => {
+    server.send(msgData, 4545, '92.98.140.67', err => {
+        //console.log(err);92.98.140.67
+    })
+}
 
 module.exports = {
     Init
