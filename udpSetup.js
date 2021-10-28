@@ -14,18 +14,16 @@ const Init = (dashboard) => {
     server.on('message', (msg, rinfo) => {
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
-        /*
         let sendAddress = rinfo.address;
         let sendPort = rinfo.port;
     
-        
-        let msgData = Buffer.from("test data");
+        let sendData = sendAddress + "|" + sendPort;
+        let msgData = Buffer.from(sendData);
     
-    
-        server.send(msgData, 4455, '92.98.140.67', err => {
-            console.log(err);
+        server.send(msgData, sendPort, sendAddress, err => {
+            if(err)console.log(err);
         })
-        */
+    
     });
 
     server.on('listening', () => {
@@ -36,29 +34,8 @@ const Init = (dashboard) => {
         console.log(`server listening ${address.address}:${address.port}`);
     });
 
-    //server.bind(PORT_NUM);
-    // Prints: server listening 0.0.0.0:41234
-
-    setTimeout(() => {
-        setInterval(() => {
-
-            let data = ipRec + "|" + portRec;
-            SendDataToIP(server, Buffer.from(data));
-        },
-            1000);
-
-    }, 3000)
-
-
-
-
-}
-
-const SendDataToIP = (server, msgData) => {
-    server.send(msgData, 4545, '92.98.140.67', err => {
-        //console.log(err);92.98.140.67
-    })
-}
+    server.bind(0);
+ }
 
 module.exports = {
     Init
