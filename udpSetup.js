@@ -1,15 +1,6 @@
 const dgram = require('dgram');
-const http = require('http');
-
 
 const Init = () => {
-
-    const PORT_NUM = process.env.PORT || 41234;
-
-    http.createServer(function (req, res) {
-        res.write('Hello World!'); //write a response to the client
-        res.end(); //end the response
-    }).listen(PORT_NUM);
 
     const server = dgram.createSocket('udp4');
     let ipRec;
@@ -19,7 +10,6 @@ const Init = () => {
         console.log(`server error:\n${err.stack}`);
         server.close();
     });
-
 
     server.on('message', (msg, rinfo) => {
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
@@ -47,7 +37,7 @@ const Init = () => {
 
     //server.bind(PORT_NUM);
     // Prints: server listening 0.0.0.0:41234
-
+/*
     setTimeout(() => {
         setInterval(() => {
 
@@ -58,7 +48,7 @@ const Init = () => {
 
     }, 3000)
 
-
+*/
 
 
 }
