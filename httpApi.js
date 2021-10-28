@@ -9,7 +9,7 @@ const Start = () => {
         let endPoint = req.url;
         EndPoints(endPoint, res);
     }).listen(PORT_NUM);
-
+    console.log("Listening to Port : " + PORT_NUM);
 }
 
 const EndPoints = (url, res) => {
