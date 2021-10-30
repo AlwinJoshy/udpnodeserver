@@ -5,10 +5,10 @@ let httpServer = null;
 let body = null;
 
 const resultStatus = {
-    done : "DONE",
-    failed : "FAILED",
-    wait : "WAIT",
-    crashed : "CRASHED"
+    done: "DONE",
+    failed: "FAILED",
+    wait: "WAIT",
+    crashed: "CRASHED"
 }
 
 const Start = (dashboard) => {
@@ -22,27 +22,27 @@ const Start = (dashboard) => {
             res.end();
         });
 
-        req.on('data', (data) => {
-            body = [];
-            body.push(data);
-        });
-
-        req.on('end', () => {
-            body = Buffer.concat(body).toString();
-            console.log(body);
-
-            if (req.method === 'POST') {
-                POSTEndPoint(endPoint, res, JSON.parse(body), dashboard);
-            }
-
-        });
-
         let endPoint = req.url;
 
         if (req.method === 'GET') {
             GETEndPoints(endPoint, res, dashboard);
         }
+        else {
+            req.on('data', (data) => {
+                body = [];
+                body.push(data);
+            });
 
+            req.on('end', () => {
+                body = Buffer.concat(body).toString();
+                console.log(body);
+
+                if (req.method === 'POST') {
+                    POSTEndPoint(endPoint, res, JSON.parse(body), dashboard);
+                }
+
+            });
+        }
 
     }).listen(PORT_NUM);
 
@@ -66,6 +66,7 @@ const GETEndPoints = (url, res, dashboard) => {
 
         default:
             res.write('unknown endpoint!');
+            res.end();
             break;
 
     }
