@@ -8,8 +8,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alwin Joshy",
-  "license": "ISC",
-  "dependencies": {
-    "dgram": "^1.0.1"
-  }
+  "license": "ISC"
 }
