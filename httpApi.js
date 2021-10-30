@@ -1,5 +1,4 @@
 const http = require('http');
-const getPublicIP = require('./getMyPublicIP.js');
 
 const PORT_NUM = process.env.PORT || 41234;
 let httpServer = null;
