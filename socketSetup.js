@@ -12,6 +12,7 @@ const Init = () => {
         c.write('hello\r\n');
         c.pipe(c);
     });
+    
     server.on('error', (err) => {
         throw err;
     });

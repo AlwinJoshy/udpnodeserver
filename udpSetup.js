@@ -30,8 +30,6 @@ const Init = (dashboard) => {
     });
 
 
-
-
     server.on('listening', () => {
         const address = server.address();
         ipRec = address.address;
@@ -40,7 +38,7 @@ const Init = (dashboard) => {
         console.log(`server listening ${address.address}:${address.port}`);
     });
 
-    server.bind(process.env.PORT || 41234);
+    // server.bind(process.env.PORT || 41234);
 
     setTimeout(() => {
         setInterval(() => {
