@@ -5,6 +5,7 @@ let httpServer = null;
 let body = null;
 
 const resultStatus = {
+    none: "NONE",
     done: "DONE",
     failed: "FAILED",
     wait: "WAIT",
@@ -34,11 +35,11 @@ const Start = (dashboard) => {
             });
 
             req.on('end', () => {
-                body = Buffer.concat(body).toString();
-                console.log(body);
+                let dataString = Buffer.concat(body).toString();
+                jsonData = GetUrlVars("?"+dataString);
 
                 if (req.method === 'POST') {
-                    POSTEndPoint(endPoint, res, JSON.parse(body), dashboard);
+                    POSTEndPoint(endPoint, res, jsonData, dashboard);
                 }
 
             });
@@ -47,6 +48,15 @@ const Start = (dashboard) => {
     }).listen(PORT_NUM);
 
     console.log("Listening to Port : " + PORT_NUM);
+}
+
+const GetUrlVars = (dataString) => {
+    var vars = {};
+    var parts = dataString.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+         (m, key, value) => {
+            vars[key] = value;
+        });
+    return vars;
 }
 
 const GETEndPoints = (url, res, dashboard) => {
@@ -77,18 +87,16 @@ const POSTEndPoint = (url, res, data, dashboard) => {
     switch (url) {
         case "/setServerDetails":
 
-            if (data.passCode == null ||
-                !data.passCode ||
+            if (data.passCode == null &&
+                data.passCode == undefined &&
                 data.passCode !== "KGHC_USER") {
                 res.write("YOU_ARE_AN_INVALID_USER");
                 res.end();
                 return;
             }
 
-            dashboard.serverIP = data.ip;
-            dashboard.serverPort = data.port
-
-            console.log(dashboard);
+            dashboard.serverIP = data.serverIP;
+            dashboard.serverPort = data.serverPort
 
             res.write(JSON.stringify(resultStatus.done));
             res.end();
