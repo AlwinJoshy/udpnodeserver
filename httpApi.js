@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const http = require('http');
 
 const PORT_NUM = process.env.PORT || 41234;
@@ -100,6 +101,8 @@ const POSTEndPoint = (url, res, data, dashboard) => {
 
             res.write(JSON.stringify(resultStatus.done));
             res.end();
+
+            console.log("INFO_POSTED : " + dashboard);
 
             break;
 
