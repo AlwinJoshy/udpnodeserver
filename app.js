@@ -29,7 +29,7 @@ server.on('listening', () => {
 
 setTimeout(() => {
     setInterval(() => {
-        server.send(Buffer.from("HAND_SHAKE_MESSAGE"), 4456, "91.74.33.16", () => { })
+        server.send(Buffer.from("HAND_SHAKE_MESSAGE"), 5545, "92.98.140.67", () => { })
     }, 1000)
 }
     , 3000)
